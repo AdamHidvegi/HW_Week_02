@@ -36,6 +36,7 @@ class Room
       guest.decrease_money_for_entry(room)
       guest_check_in(guest)
       bar.pay_for_entry(room)
+      guest_fav_song(guest)
     elsif guest.money() < room.entry_fee()
       return "You can't get in!"
     end
