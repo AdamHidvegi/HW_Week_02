@@ -92,15 +92,20 @@ class RoomTest < MiniTest::Test
   end
 
   def test_check_entry_fee__enough_money()
-    @room2.check_entry_fee(@guest2, @room2, @bar)
+    result = @room2.check_entry_fee(@guest2, @room2, @bar)
     assert_equal(36, @guest2.money())
     assert_equal(1, @room2.population())
     assert_equal(1, @room2.entry().length())
     assert_equal(104, @bar.cash())
+    assert_equal("WHOOOOO", result)
+  end
+
+  def test_check_entry_fee__no_fav_song()
+    result = @room2.check_entry_fee(@guest4, @room2, @bar)
+    assert_equal("BOOOOO", result)
   end
 
   def test_check_entry_fee__not_enough_money()
-    @room2.check_entry_fee(@guest1, @room2, @bar)
     result = @room2.check_entry_fee(@guest1, @room2, @bar)
     assert_equal(1, @guest1.money())
     assert_equal(0, @room2.population())
